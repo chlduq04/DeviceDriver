@@ -1,3 +1,5 @@
+import java.util.Vector;
+
 /**
  * This class represents the interface to a Flash Memory Device. The hardware has only two methods - 'read' and 'write'
  * However, the interface for using the device is a lot more complex than that.
@@ -8,4 +10,7 @@ public interface FlashMemoryDevice {
 
     void write(long address, byte data);
 
+    Vector<Byte> readAndPrint(long startAddress, long endAddress);
+
+    void writeAll(byte data);
 }

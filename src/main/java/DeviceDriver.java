@@ -1,3 +1,6 @@
+import javax.naming.SizeLimitExceededException;
+import java.util.Vector;
+
 /**
  * This class is used by the operating system to interact with the hardware 'FlashMemoryDevice'.
  */
@@ -44,5 +47,20 @@ public class DeviceDriver {
             throw new WriteFailException();
         }
         hardware.write(address, data);
+    }
+
+    public Vector<Byte> readAndPrint(long startAddress, long endAddress) {
+        Vector<Byte> result = new Vector<>();
+        for (long nowAddress = startAddress; nowAddress < endAddress; nowAddress++) {
+            result.add(read(nowAddress));
+        }
+        return result;
+    }
+
+    public void writeAll(byte data) {
+        write(0x00, data);
+        write(0x01, data);
+        write(0x02, data);
+        write(0x03, data);
     }
 }
